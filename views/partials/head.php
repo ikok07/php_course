@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../style.css" />
+<!--    <link rel="stylesheet" href=--><?php //= base_path("style.css") ?><!-- />-->
     <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
     <title>PHP Course</title>
 </head>

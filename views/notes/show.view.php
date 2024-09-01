@@ -1,5 +1,5 @@
-<?php include "partials/head.php" ?>
-<?php include "partials/nav.php" ?>
+<?php include base_path("views/partials/head.php") ?>
+<?php include base_path("views/partials/nav.php") ?>
 
 <div class="relative isolate px-6 pt-14 lg:px-8">
     <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
@@ -9,21 +9,9 @@
     </div>
     <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
         <div class="text-center">
-            <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">This is the PHP website's notes page
-            </h1>
-            <ul>
-                <?php foreach ($notes as $note): ?>
-                    <a href="/note?id=<?= $note["id"] ?>">
-                        <li class="mt-6 text-lg leading-8 text-gray-600"><?= htmlspecialchars($note["body"]) ?></li>
-                    </a>
-                <?php endforeach; ?>
-            </ul>
-            <a href="/notes/create">
-                <button
-                    class="bg-purple-900 text-white px-4 py-2 rounded-md font-bold mt-10 transition hover:bg-purple-800">
-                    Create note
-                </button>
-            </a>
+            <p><?= htmlspecialchars($note["body"]) ?></p>
+            <a href="/note/edit?id=<?= $note["id"] ?>"><?php PrimaryButton("Edit"); ?></a>
+            <a href="/notes"><?php PrimaryButton("Go back..."); ?></a>
         </div>
     </div>
     <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
@@ -33,4 +21,4 @@
         </div>
     </div>
 </div>
-<?php include "partials/foot.php" ?>
+<?php include base_path("views/partials/foot.php") ?>

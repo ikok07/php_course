@@ -1,5 +1,3 @@
 <?php
 
-$heading = "Home";
-
-include "views/index.view.php";
+view("index.view.php", ["heading" => "Home"]);
