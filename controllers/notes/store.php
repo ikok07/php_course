@@ -13,5 +13,5 @@ if (!Validator::string($_POST["body"], 1, 1000))
 
 if (!empty($errors)) return view("notes/create.view.php", ["errors" => $errors]);
 
-$db->query("INSERT INTO notes(body, user_id) VALUES(?, ?)", [$_POST["body"], 1]);
+$db->query("INSERT INTO notes(body, user_id) VALUES(?, ?)", [$_POST["body"], $_SESSION["user"]["id"]]);
 header("location: /notes");

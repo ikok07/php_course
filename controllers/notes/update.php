@@ -2,10 +2,8 @@
 
 $db = Core\App::resolve(Core\Database::class);
 
-$user_id = 1;
-
 $note = $db->query("select * from notes where id = ?", [$_POST["id"]])->findOrFail();
-authorize($note["user_id"] === $user_id);
+authorize($note["user_id"] === $_SESSION["user"]["id"]);
 
 $errors = [];
 

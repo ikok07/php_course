@@ -19,6 +19,8 @@ App::bind("Core\Database", function () {
     return new Database($config);
 });
 
+session_start();
+
 $router = new Core\Router();
 
 $uri = parse_url($_SERVER["REQUEST_URI"])["path"];

@@ -19,11 +19,28 @@
         <div class="hidden lg:flex lg:gap-x-12">
             <a href="/" class="<?php if (urlIs("/")) echo $active_nav_btn_class ?> text-sm font-semibold leading-6 text-gray-900">Home</a>
             <a href="/about" class="<?php if (urlIs("/about")) echo $active_nav_btn_class ?> text-sm font-semibold leading-6 text-gray-900">About us</a>
-            <a href="/notes" class="<?php if (urlIs("/notes")) echo $active_nav_btn_class ?> text-sm font-semibold leading-6 text-gray-900">Notes</a>
+            <?php if ($_SESSION["user"]) : ?>
+                <a href="/notes" class="<?php if (urlIs("/notes")) echo $active_nav_btn_class ?> text-sm font-semibold leading-6 text-gray-900">Notes</a>
+            <?php endif; ?>
             <a href="/contact" class="<?php if (urlIs("/contact")) echo $active_nav_btn_class ?> text-sm font-semibold leading-6 text-gray-900">Contact</a>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span aria-hidden="true">&rarr;</span></a>
+            <?php if ($_SESSION["user"] ?? false) : ?>
+                <form method="POST" action="/session" class="mr-10">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="text-sm font-semibold leading-6 text-gray-900">Log Out</button>
+                    <span aria-hidden="true">&rarr;</span>
+                </form>
+            <?php else : ?>
+                <div class="mr-10">
+                    <a href="/register" class="text-sm font-semibold leading-6 text-gray-900">Register</a>
+                    <span aria-hidden="true">&rarr;</span>
+                </div>
+                <div>
+                    <a href="/login" class="text-sm font-semibold leading-6 text-gray-900">Login</a>
+                    <span aria-hidden="true">&rarr;</span>
+                </div>
+            <?php endif ?>
         </div>
     </nav>
 </header>
