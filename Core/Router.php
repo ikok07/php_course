@@ -1,9 +1,8 @@
 <?php
 
 namespace Core;
-use Core\Middleware;
 
-use Core\Middleware\Guest;
+use Core\Middleware\Middleware;
 
 class Router {
     protected $routes = [];
@@ -19,7 +18,7 @@ class Router {
             "uri" => $uri,
             "controller" => $controller,
             "method" => $method,
-            "middleware" => null,
+            "Middleware" => null,
         ];
         return $this;
     }
@@ -47,17 +46,22 @@ class Router {
 
     public function only($key)
     {
-        $this->routes[array_key_last($this->routes)]["middleware"] = $key;
+        $this->routes[array_key_last($this->routes)]["Middleware"] = $key;
         return $this;
+    }
+
+    public function previousUrl()
+    {
+        return $_SERVER["HTTP_REFERER"];
     }
 
     public function route($uri, $method)
     {
         foreach ($this->routes as $route) {
             if ($route["uri"] === $uri && $route["method"] === strtoupper($method)) {
-                if ($route["middleware"]) Middleware\Middleware::resolve($route["middleware"]);
+                if ($route["Middleware"]) Middleware::resolve($route["Middleware"]);
 
-                return include base_path($route["controller"]);
+                return include base_path("Http/controllers/{$route["controller"]}");
             }
         }
 
